@@ -1,0 +1,18 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdftex 2021.11.3)  12 MAR 2023 05:46
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**Masterarbeit_EN.tex
+(./Masterarbeit_EN.tex
+./Masterarbeit_EN.tex:2: Undefined control sequence.
+l.2 \documentclass
+                  [Master, MBE, english]{twbook}
+? 
+./Masterarbeit_EN.tex:2: Emergency stop.
+l.2 \documentclass
+                  [Master, MBE, english]{twbook}
+End of file on the terminal!
+
+./Masterarbeit_EN.tex:2:  ==> Fatal error occurred, no output PDF file produced
+!
