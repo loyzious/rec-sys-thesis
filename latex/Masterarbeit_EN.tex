@@ -1,17 +1,20 @@
+% !TEX TS-program = pdflatexmk
 % !TEX encoding = IsoLatin2
-\documentclass[Bachelor, BBE, english]{twbook}
+\documentclass[Master, MDS, english]{twbook}
 \usepackage[T1]{fontenc}
 % Hier kann je nach Betriebssystem eine der folgenden Optionen notwendig sein, um die Umlaute korrekt wiederzugeben:
 % utf8, latin, applemac
 \usepackage[ansinew]{inputenc}
 % Die nachfolgenden 2 Pakete stellen sonst nicht benötigte Features zur Verfügung
 \usepackage{blindtext,dtklogos}
+ \usepackage[comma]{natbib}
 
 \title{Title of paper\\Title of paper}
 \author{Degree First Name Surname, Degree}
 \studentnumber{XXXXXXXXXXXXXXX}
 \supervisor{Degree First Name Surname, Degree}
-\place{Vienna}
+\secondsupervisor{Degree First Name Surname, Degree}
+\place{Place}
 \kurzfassung{\blindtext}
 \schlagworte{Schlagwort1, Schlagwort2, Schlagwort3, Schlagwort4}
 \outline{\blindtext}
@@ -89,8 +92,7 @@ Hier wird auf die Formel \ref{Gl1} verwiesen.
 x = -\frac{p}{2}\pm\sqrt{\frac{p^2}{4}-q}\label{Gl1}
 \end{align}
 
-Literaturverweise sollten automatisch verwaltet werden, vor allem dann, wenn es viele Quellenverweise gibt. Hier wird auf \cite{Balzert:2005} und \cite{Wagner:2007,Aloyetal:1995} verwiesen. Das verwendete Zitierformat (bzw. das Format des Literaturverzeichnisses) wird entspechend den Vorgaben der Studiengänge automatisch ausgewählt. Es wird dringend empfohlen, \BibTeX zu verwenden (also nicht die Literaturquellen wie in diesem Beispiel manuell im Dokument einzugeben. 
-
+Literaturverweise sollten automatisch verwaltet werden, vor allem dann, wenn es viele Quellenverweise gibt.verwiesen. Das verwendete Zitierformat (bzw. das Format des Literaturverzeichnisses) wird entspechend den Vorgaben der Studiengänge automatisch ausgewählt. Es wird dringend empfohlen, 
 \chapter{Zweite Überschrift Tiefe 0 (chapter)}
 \blindtext 
 
@@ -120,21 +122,13 @@ Hier wird auf die Formel \ref{Gl1} verwiesen.
 x = -\frac{p}{2}\pm\sqrt{\frac{p^2}{4}-q}\label{Gl2}
 \end{align}
 
-Literaturverweise sollten automatisch verwaltet werden, vor allem dann, wenn es viele Quellenverweise gibt. Hier wird auf \cite{Balzert:2005} und \cite{Wagner:2007,Aloyetal:1995} verwiesen. Das verwendete Zitierformat (bzw. das Format des Literaturverzeichnisses) wird entspechend den Vorgaben der Studiengänge automatisch ausgewählt. Es wird dringend empfohlen, \BibTeX zu verwenden (also nicht die Literaturquellen wie in diesem Beispiel manuell im Dokument einzugeben. 
+Literaturverweise sollten automatisch verwaltet werden, vor allem dann, wenn es viele Quellenverweise gibt. Hier wird auf verwiesen. Das verwendete Zitierformat (bzw. das Format des Literaturverzeichnisses) wird entspechend den Vorgaben der Studiengänge automatisch ausgewählt. 
 
 \clearpage
-\bibliographystyle{plain}
-\begin{thebibliography}{99}
-\bibitem{Balzert:2005}
-H.~Balzert \newblock{\em{Lehrbuch der Objektmodellierung - Analyse und Entwurf mit der UML 2}},  2. Ausg., Elsevier GmbH, München 2005.
+Count of mentions of women. \cite{Rangel2018}
 
-\bibitem{Wagner:2007}
-K.W.~Wagner \newblock{\em{Performance Excellence. Der Praxisleitfaden zum effektiven Prozessmanagement}}, Hanser Fachbuch, München 2007.
-
-\bibitem{Aloyetal:1995}
-A.~Aloy, E.~Schragl, H.~Neth, A.~Donner, und A.~Kluwick \newblock{\em{Strömungsverhalten des Atemgases bei SHFJ Jet-Laryngoskop}}
-\newblock {\textsc {Der Anästhesist}}, 44:558--565, 1995.
-\end{thebibliography}
+\bibliographystyle{agsm}
+\bibliography{../References/references}
 \clearpage
 
 % Das Abbildungsverzeichnis

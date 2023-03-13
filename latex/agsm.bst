@@ -1,90 +1,48 @@
-%% BibTeX bibliography style `Harvard_FHTW_MR' (harvard style - UAS Technikum Wien, MR)
-%
-% Filename: Harvard_FHTW_MR.bst
-% Author: Michael Widrich 
-% E-mail: michael.widrich@gmx.at
-% Description: This file contains a modified harvard style version, adapted to
-%   the UAS Technikum Wien Mechatronics/Robotics bibliography style standard. 
-%   This bibliography style is based on the Anglia Rustky harvard style.
-%   Supported types:
-%		*) Zeitschriften- oder Journalartikel (use article)
-%		*) eJournal (use article with medium=eJournal)
-%		*) book
-%		*) eBook (use book with medium=eBook)
-%		*) inproceedings
-%		*) patent (use patent)
-%		*) misc (for reports/thesis/guidelines/datasheet - use medium=....)
-%		*) picture (use medium=Photographie)
-%		*) website (use medium=Online)
-%
-% Please send bug reports and/or feature requests to kubinger@technikum-wien.at
-%
-% Version  Date        Author            Comments
-% -------  ----------  ----------------  ------------------------------
-% 1.0      16.01.2012  Michael Widrich   Missing some media-types and error handling 
-% 1.1      19.01.2012  Michael Widrich   Additional media-types added
-% 1.2      20.01.2012  Michael Widrich   Pages-Bug  fixed;
-%                                        First support for english language added
-% 1.2b     23.01.2012  Michael Widrich   Unused functions removed
-% 1.2c     03.04.2012  Michael Widrich   Empty string bug """ list.year *  output.nonnull" fixed
-%                                        E-Magazine "," bug fixed
-% 1.2d     05.04.2012  Michael Widrich   inproceedings function added
-% 1.2e     05.09.2012  Michael Widrich   bugs removed (empty string output)
-% 1.2f     08.08.2014  Wilfried Kubinger added some features plus a short description
-%
-%
-% ACKNOWLEDGEMENT:
-%   This file is a modified version of agsm.bst and alpha.bst to which it owes
-%   much of its functionality.
-%
-% Copying of this file is authorized only if either
-%   (1) you make absolutely no changes to your copy, including name, or
-%   (2) if you do make changes, you name it something other than
-%   btxbst.doc, plain.bst, unsrt.bst, alpha.bst, abbrv.bst, agsm.bst,
-%   dcu.bst, kluwer.bst or HarvardFHTWMR.bst.
-%   This restriction helps ensure that all standard styles are identical.
-%   The file harvard.tex has the documentation for this style.
-%
-% Copyright (c) 2012
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BibTeX standard bibliography style `agsm' (one of the harvard family)
+	% version 0.99a for BibTeX versions 0.99a or later, LaTeX version 2.09.
+	% Copyright (C) 1991, all rights reserved.
+	% Copying of this file is authorized only if either
+	% (1) you make absolutely no changes to your copy, including name, or
+	% (2) if you do make changes, you name it something other than
+	% btxbst.doc, plain.bst, unsrt.bst, alpha.bst, abbrv.bst, agsm.bst,
+        % dcu.bst or kluwer.bst.
+	% This restriction helps ensure that all standard styles are identical.
+	% The file harvard.tex has the documentation for this style.
 
+% ACKNOWLEDGEMENT:
+%   This document is a modified version of alpha.bst to which it owes much of
+%   its functionality.
+
+% AUTHOR
+%   Peter Williams, Key Centre for Design Quality, Sydney University
+%   e-mail: peterw@archsci.arch.su.oz.au
 
 ENTRY
   { address
     author
     booktitle
-    bookyear
     chapter
-    date
     edition
     editor
     howpublished
     institution
     journal
     key
-    level
-    location
-    medium
     month
     note
     number
     organization
     pages
-    patentnr
     publisher
     school
     series
     title
     type
-    university
     URL
-    URLDatabase
-    URLDate
-    URLLibary
     volume
     year
   }
-  { field.used etal.allowed etal.required}
+  { field.used etal.allowed etal.required} %%%XXX change
   { extra.label sort.label list.year }
 
 INTEGERS { output.state before.all mid.sentence after.sentence after.block }
@@ -96,75 +54,12 @@ FUNCTION {init.state.consts}
   #3 'after.block :=
 }
 
-STRINGS { s t f mediumDescription}
+STRINGS { s t f }
 
 FUNCTION {output.nonnull}
 { 's :=
   output.state mid.sentence =
-    { ". " * write$ }
-    { output.state after.block =
-	{ add.period$ write$
-	  newline$
-	  "\newblock " write$
-	}
-	{ output.state before.all =
-	    'write$
-	    { add.period$ " " * write$ }
-	  if$
-	}
-      if$
-      mid.sentence 'output.state :=
-    }
-  if$
-  s
-}
-
-FUNCTION {poutput.nonnull}
-{ 's :=
-  output.state mid.sentence =
-    { ": " * write$ }
-    { output.state after.block =
-	{ add.period$ write$
-	  newline$
-	  "\newblock " write$
-	}
-	{ output.state before.all =
-	    'write$
-	    { add.period$ " " * write$ }
-	  if$
-	}
-      if$
-      mid.sentence 'output.state :=
-    }
-  if$
-  s
-}
-
-FUNCTION {toutput.nonnull}
-{ 's :=
-  output.state mid.sentence =
     { ", " * write$ }
-    { output.state after.block =
-	{ add.period$ write$
-	  newline$
-	  "\newblock " write$
-	}
-	{ output.state before.all =
-	    'write$
-	    { add.period$ " " * write$ }
-	  if$
-	}
-      if$
-      mid.sentence 'output.state :=
-    }
-  if$
-  s
-}
-
-FUNCTION {eoutput.nonnull}
-{ 's :=
-  output.state mid.sentence =
-    { " " * write$ }
     { output.state after.block =
 	{ add.period$ write$
 	  newline$
@@ -186,27 +81,6 @@ FUNCTION {output}
 { duplicate$ empty$
     'pop$
     'output.nonnull
-  if$
-}
-
-FUNCTION {poutput}
-{ duplicate$ empty$
-    'pop$
-    'poutput.nonnull
-  if$
-}
-
-FUNCTION {toutput}
-{ duplicate$ empty$
-    'pop$
-    'toutput.nonnull
-  if$
-}
-
-FUNCTION {eoutput}
-{ duplicate$ empty$
-    'pop$
-    'eoutput.nonnull
   if$
 }
 
@@ -286,44 +160,9 @@ FUNCTION {quote}
 }
 
 FUNCTION {write.url}
-{
-  URL empty$
-    {
-    	URLDatabase empty$
-    		{ skip$ }
-  			{
-   			URLDate empty$
-  				{ "{\acessedthroughp} " URLDatabase * "[{\acessedat} !no date!]." * write$ newline$ }
-  				{ "{\acessedthroughp} " URLDatabase * " [{\acessedat} " URLDate * "]." * * write$ newline$ }
-  			if$
-  			}
- 		if$
-    }
-    {URLLibary empty$
-    	{
-    	URLDatabase empty$
-    	{
-    		URLDate empty$
-    	    	{ "{\acessedthrough} <\url{" URL * "}> [{\acessedat} !no date!]." * write$ newline$ }
-    			{ "{\acessedthrough} <\url{" URL * "}> [{\acessedat} " URLDate * "]." * * write$ newline$ }
-    		if$
-    	}
-    	{
-    	   	URLDate empty$
-    	    	{ "{\acessedthroughp} " URLDatabase * "[{\acessedat} !no date!]." * write$ newline$ }
-    			{ "{\acessedthroughp} " URLDatabase * " [{\acessedat} " URLDate * "]." * * write$ newline$ }
-    		if$
-    	}
-    	if$
-    	}
-    	{
-    	URLDate empty$
-    		{ "{\acessedthroughp} " URLLibary * " <\url{" URL * "}> [{\acessedat} !no date!]." * * write$ newline$ }
-    		{ "{\acessedthroughp} " URLLibary * " <\url{" URL * "}> [{\acessedat} " URLDate * "]." * * * write$ newline$ }
-    	if$
-    	}
-    if$
-    }
+{ URL empty$
+    { skip$ }
+    { "\newline\harvardurl{" URL * "}" * write$ newline$ }
   if$
 }
 
@@ -341,8 +180,8 @@ FUNCTION {format.names}
 	{ namesleft #1 >
 	    { ", " * t * }
 	    { t "others" =
-			{ " et~al." * }
-			{ " {\harvardand} " * t * }
+		{ " et~al." * }
+		{ " \harvardand\ " * t * }
 	      if$
 	    }
 	  if$
@@ -367,8 +206,8 @@ FUNCTION {format.editors}
     { "" }
     { "{vv~}{ll}{, jj}{, f.}" editor format.names
       editor num.names$ #1 >
-		{ " eds." * }
-		{ " ed." * }
+	{ ", eds" * }
+	{ ", ed." * }
       if$
     }
   if$
@@ -474,8 +313,8 @@ FUNCTION {format.edition}
 { edition empty$
     { "" }
     { output.state mid.sentence =
-	{ edition "l" change.case$ "{\edition}" * }
-	{ edition "t" change.case$ "{\edition}" * }
+	{ edition "l" change.case$ " edn" * }
+	{ edition "t" change.case$ " edn" * }
       if$
     }
   if$
@@ -507,18 +346,18 @@ FUNCTION {format.pages}
 { pages empty$
     { "" }
     { pages multi.page.check
-	{ "{\multiplepages}" pages n.dashify * }
-	{ "{\singlepage}" pages * }
+	{ "pp.~" pages n.dashify * }
+	{ "p.~" pages * }
       if$
     }
   if$
 }
 
 FUNCTION {format.vol.num.pages}
-{ volume field.or.null
+{ volume embolden field.or.null
   number empty$
     'skip$
-    { "(" * number * ")" *
+    { "(" number * ")" * *
       volume empty$
 	{ "there's a number but no volume in " cite$ * warning$ }
 	'skip$
@@ -529,7 +368,7 @@ FUNCTION {format.vol.num.pages}
     'skip$
     { duplicate$ empty$
 	{ pop$ format.pages }
-	{ ", " * format.pages * }
+	{ ",~" * pages n.dashify * }
       if$
     }
   if$
@@ -700,7 +539,7 @@ FUNCTION {format.lab.names.abbr}
 	{ s #1 "{vv~}{ll}" format.name$ " et~al." * }
 	{ s #2 "{ff }{vv }{ll}{ jj}" format.name$ "others" =
             { s #1 "{vv~}{ll}" format.name$ " et~al." * }
-	    { s #1 "{vv~}{ll}" format.name$ " {\harvardand} " *
+	    { s #1 "{vv~}{ll}" format.name$ " \harvardand\ " *
               s #2 "{vv~}{ll}" format.name$ * 
             }
           if$
@@ -723,7 +562,7 @@ FUNCTION {format.lab.names.full}
 	    { ", " * t * }
 	    { t "others" =
 		{ " et~al." * }
-		{ " {\harvardand} " * t * }
+		{ " \harvardand\ " * t * }
 	      if$
 	    }
 	  if$
@@ -792,7 +631,7 @@ FUNCTION {make.full.label}
   if$
 }
 
-FUNCTION {make.abbr.label}
+FUNCTION {make.abbr.label} %%%XXX change
 {
   etal.allowed
     { author.field field.used =
@@ -822,7 +661,7 @@ FUNCTION {make.abbr.label}
 
 FUNCTION {output.bibitem}
 { newline$
-  etal.allowed        
+  etal.allowed        %%%XXX change
   etal.required
   and
     {
@@ -846,32 +685,21 @@ FUNCTION {output.bibitem}
 }
 
 FUNCTION {list.label.output}
-{ make.list.label ", " * write$
+{ make.list.label " " * write$
 }
 
 FUNCTION {article}
 { output.bibitem
   list.label.output
-  "" list.year *  output.nonnull
+  " \harvardyearleft " list.year * "\harvardyearright " * output.nonnull
   author "author" item.check
   title.field field.used =
     { skip$ }
-    { format.title "title" output.check }
+    { format.title quote "title" output.check }
   if$
   crossref missing$
     { journal emphasize "journal" duplicate$ item.check
-    medium empty$
-    	{  mediumDescription empty$
-    	   { ", " *  format.vol.num.pages * output }
-    	   { mediumDescription "{eabstract}" =
-    	     { ", " * "{\lbrack}" * "{e-journal}" * "{\rbrack \ }" * format.vol.num.pages * "{, {\abstractonly}}" * output }
-    	     { ", " * "{\lbrack}" * mediumDescription * "{\rbrack \ }" * format.vol.num.pages * output }
-    	     if$
-    	     "" 'mediumDescription := }
-    	   if$
-    	}
-    	{ ", " * format.vol.num.pages * ". " * "{\lbrack}" * medium * "{\rbrack \ }" * output }
-    if$
+      " " * format.vol.num.pages * output
     }
     { format.article.crossref output.nonnull
       format.pages output
@@ -886,159 +714,7 @@ FUNCTION {article}
 FUNCTION {book}
 { output.bibitem
   list.label.output
-  "" list.year *  output.nonnull
-  author empty$
-    { editor "author and editor" item.check }
-    { crossref missing$
-		{ "author and editor" editor either.or.check }
-		'skip$
-      if$
-    }
-  if$
-  title.field field.used =
-    { skip$ }
-    { format.btitle "title" output.check }
-  if$
-  crossref missing$
-    { format.bvolume output
-      format.number.series output
-      format.edition output
-      medium empty$
-      {	 
-      	 mediumDescription empty$
-      	 { address output }
-     	 { mediumDescription "{dissertation}" =
-     	 	{ level output  university output }
-     	 	{ "{\lbrack}" mediumDescription * "{\rbrack \ }" * address * output }     	 
-     	   if$
-     	   "" 'mediumDescription := }
-     	 if$
-      }  
-      { "{\lbrack}" medium * "{\rbrack \ }" * address * output} 
-      if$
-      publisher poutput
-    }
-    { format.book.crossref output.nonnull
-      format.edition output
-    }
-  if$
-  new.block
-  note output
-  fin.entry
-  write.url
-}
-
-FUNCTION {edchapter}
-{ output.bibitem
-  list.label.output
-  "" list.year *  output.nonnull
-  author "author" item.check
-  title.field field.used =
-    { skip$ }
-    { format.title "title" output.check }
-  if$
-  crossref missing$
-    { ". In: " *  editor * ". " * bookyear * ". " * write$ 
-      booktitle emphasize "booktitle" duplicate$ item.check
-      address output
-      publisher poutput
-      chapter empty$
-  		{". " *  format.pages * }
-  		{". {\chapternr}" *  chapter * }
-  	  if$
-    }
-    { format.article.crossref output.nonnull
-      format.pages output
-    }
-  if$
-  new.block
-  note output
-  fin.entry
-}
-
-FUNCTION {inproceedings}
-{ output.bibitem
-  list.label.output
-  "" list.year *  output.nonnull
-  author "author" item.check
-  title.field field.used =
-    { skip$ }
-    { format.title "title" output.check }
-  if$
-  crossref missing$
-    { ". In: " * write$ 
-      booktitle emphasize "booktitle" duplicate$ item.check
-      date ", " * location * ": " * publisher * output
-      format.pages toutput
-    }
-    { format.article.crossref output.nonnull
-      format.pages output
-    }
-  if$
-  new.block
-  note output
-  fin.entry
-}
-
-FUNCTION {emagazine}
-{ output.bibitem
-  list.label.output
-  "" list.year *  output.nonnull
-  author "author" item.check
-  title.field field.used =
-    { skip$ }
-    { format.title "title" output.check }
-  if$
-  crossref missing$
-    { journal emphasize "journal" duplicate$ item.check 
-
-	  ", " * "{\lbrack}" * "{online}" * "{\rbrack}" * toutput
-    }
-    { format.article.crossref output.nonnull
-      format.pages output
-    }
-  if$
-  new.block
-  note output
-  fin.entry
-  write.url
-}
-
-FUNCTION {newspaper}
-{ output.bibitem
-  list.label.output
-  "" list.year *  output.nonnull
-  author "author" item.check
-  title.field field.used =
-    { skip$ }
-    { format.title "title" output.check }
-  if$
-  crossref missing$
-    { journal emphasize "journal" duplicate$ item.check
-    medium empty$
-    	{  mediumDescription empty$
-    	   { ", " *  date * " " * format.pages  * output }
-    	   { ", " * "{\lbrack}" * mediumDescription * "{\rbrack \ }" * date * output 
-    	     "" 'mediumDescription := }
-    	   if$
-    	}
-    	{ ", " * "{\lbrack}" * medium * "{\rbrack \ }" * date * output }
-    if$
-    }
-    { format.article.crossref output.nonnull
-      format.pages output
-    }
-  if$
-  new.block
-  note output
-  fin.entry
-  write.url
-}
-
-FUNCTION{patent}
-{ output.bibitem
-  list.label.output
-  "" list.year *  output.nonnull
+  " \harvardyearleft " list.year * "\harvardyearright " * output.nonnull
   author empty$
     { editor "author and editor" item.check }
     { crossref missing$
@@ -1052,8 +728,11 @@ FUNCTION{patent}
     { format.btitle "title" output.check }
   if$
   crossref missing$
-    { 
-      patentnr output
+    { format.bvolume output
+      format.number.series output
+      format.edition output
+      publisher "publisher" output.check
+      address output
     }
     { format.book.crossref output.nonnull
       format.edition output
@@ -1062,17 +741,34 @@ FUNCTION{patent}
   new.block
   note output
   fin.entry
+  write.url
 }
 
-FUNCTION{picture}
+FUNCTION {booklet}
 { output.bibitem
   list.label.output
-  "" list.year *  output.nonnull
+  " \harvardyearleft " list.year * "\harvardyearright " * output.nonnull
+  title.field field.used =
+    { skip$ }
+    { format.title quote "title" output.check }
+  if$
+  howpublished output
+  address output
+  new.block
+  note output
+  fin.entry
+  write.url
+}
+
+FUNCTION {inbook}
+{ output.bibitem
+  list.label.output
+  " \harvardyearleft " list.year * "\harvardyearright " * output.nonnull
   author empty$
     { editor "author and editor" item.check }
     { crossref missing$
-		{ "author and editor" editor either.or.check }
-		'skip$
+	{ "author and editor" editor either.or.check }
+	'skip$
       if$
     }
   if$
@@ -1081,40 +777,228 @@ FUNCTION{picture}
     { format.btitle "title" output.check }
   if$
   crossref missing$
-    { 
+    { format.bvolume output
+      format.number.series output
       format.edition output
-      medium empty$
-      {"{\lbrack}" mediumDescription * "{\rbrack}"  *}
-      {"{\lbrack}" medium * "{\rbrack}"  *}
-      if$
+      publisher "publisher" output.check
+      address output
     }
     { format.book.crossref output.nonnull
       format.edition output
     }
   if$
-  URL empty$
-      {"\ (" * note * ")" * output
-      fin.entry}
-      {output
-      new.block
-      write$
-      newline$
-      write.url}
+  format.chapter.pages "chapter and pages" output.check
+  new.block
+  note output
+  fin.entry
+  write.url
+}
+
+FUNCTION {incollection}
+{ output.bibitem
+  list.label.output
+  " \harvardyearleft " list.year * "\harvardyearright " * output.nonnull
+  title.field field.used =
+    { skip$ }
+    { format.title "title" output.check }
   if$
+  author "author" item.check
+  crossref missing$
+    { format.in.ed.booktitle "booktitle" output.check
+      format.edition output
+      format.bvolume output
+      format.number.series output
+      publisher "publisher" output.check
+      address output
+    }
+    { format.incoll.inproc.crossref output.nonnull
+    }
+  if$
+  format.chapter.pages output
+  new.block
+  note output
+  fin.entry
+  write.url
 }
 
-FUNCTION{website}
-{
-  picture
+FUNCTION {inproceedings}
+{ output.bibitem
+  list.label.output
+  " \harvardyearleft " list.year * "\harvardyearright " * output.nonnull
+  title.field field.used =
+    { skip$ }
+    { format.title "title" output.check }
+  if$
+  author "author" item.check
+  crossref missing$
+    { format.in.ed.booktitle "booktitle" output.check
+      format.bvolume output
+      format.number.series output
+      address empty$
+	{ organization output
+	  publisher output
+	}
+	{ organization output
+	  publisher output
+          address output.nonnull
+ 	}
+      if$
+    }
+    { format.incoll.inproc.crossref output.nonnull
+    }
+  if$
+  format.pages output
+  new.block
+  note output
+  fin.entry
+  write.url
 }
 
+FUNCTION {conference} { inproceedings }
 
-FUNCTION{norm}
-{
-  book
+FUNCTION {manual}
+{ output.bibitem
+  list.label.output
+  " \harvardyearleft " list.year * "\harvardyearright " * output.nonnull
+  title.field field.used =
+    { skip$ }
+    { format.btitle "title" output.check }
+  if$
+  format.edition output
+  author empty$
+    { organization empty$
+	{ address output }
+	'skip$
+      if$
+    }
+    { organization output
+      address output
+    }
+  if$
+  new.block
+  note output
+  fin.entry
+  write.url
 }
 
-FUNCTION {default.type} { book }
+FUNCTION {mastersthesis}
+{ output.bibitem
+  list.label.output
+  " \harvardyearleft " list.year * "\harvardyearright " * output.nonnull
+  author "author" item.check
+  title.field field.used =
+    { skip$ }
+    { format.title "title" output.check }
+  if$
+  "Master's thesis" format.thesis.type output.nonnull
+  school "school" output.check
+  address output
+  new.block
+  note output
+  fin.entry
+  write.url
+}
+
+FUNCTION {misc}
+{ output.bibitem
+  list.label.output
+  " \harvardyearleft " list.year * "\harvardyearright " * output.nonnull
+  title.field field.used =
+    { skip$ }
+    { format.title quote output }
+  if$
+  howpublished output
+  new.block
+  note output
+  fin.entry
+  write.url
+  empty.misc.check
+}
+
+FUNCTION {phdthesis}
+{ output.bibitem
+  list.label.output
+  " \harvardyearleft " list.year * "\harvardyearright " * output.nonnull
+  author "author" item.check
+  title.field field.used =
+    { skip$ }
+    { title "title" output.check }
+  if$
+  "PhD thesis" format.thesis.type output.nonnull
+  school "school" output.check
+  address output
+  new.block
+  note output
+  fin.entry
+  write.url
+}
+
+FUNCTION {proceedings}
+{ output.bibitem
+  list.label.output
+  " \harvardyearleft " list.year * "\harvardyearright " * output.nonnull
+  title.field field.used =
+    { skip$ }
+    { format.btitle "title" output.check }
+  if$
+  format.bvolume output
+  format.number.series output
+  address empty$
+    { editor empty$
+	{ skip$ }
+	{ organization output
+	}
+      if$
+      publisher output
+    }
+    { editor empty$
+	'skip$
+	{ organization output }
+      if$
+      publisher output
+      address output.nonnull
+    }
+  if$
+  new.block
+  note output
+  fin.entry
+  write.url
+}
+
+FUNCTION {techreport}
+{ output.bibitem
+  list.label.output
+  " \harvardyearleft " list.year * "\harvardyearright " * output.nonnull
+  author "author" item.check
+  title.field field.used =
+    { skip$ }
+    { format.title "title" output.check }
+  if$
+  format.tr.number output.nonnull
+  institution "institution" output.check
+  address output
+  new.block
+  note output
+  fin.entry
+  write.url
+}
+
+FUNCTION {unpublished}
+{ output.bibitem
+  list.label.output
+  " \harvardyearleft " list.year * "\harvardyearright " * output.nonnull
+  author "author" item.check
+  title.field field.used =
+    { skip$ }
+    { format.title "title" output.check }
+  if$
+  new.block
+  note "note" output.check
+  fin.entry
+  write.url
+}
+
+FUNCTION {default.type} { misc }
 
 MACRO {jan} {"January"}
 
@@ -1191,7 +1075,7 @@ FUNCTION {sortify}
 }
 
 FUNCTION {sortify.names}
-{ " {\harvardand} " " " replace.substring
+{ " \harvardand\ " " " replace.substring
   " et~al." " zzz" replace.substring
   sortify
 }
@@ -1274,7 +1158,7 @@ FUNCTION {calc.label} %%%XXX change
   'sort.label :=
 }
 
-FUNCTION {preliminaries}
+FUNCTION {preliminaries} %%%XXX change
 { type$ "book" =
   type$ "inbook" =
   or
